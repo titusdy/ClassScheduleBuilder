@@ -18,7 +18,7 @@ public class ScheduleDriver
         ClassBuilder currentSemester = new ClassBuilder();
 
         //System.out.println(currentSemester.getClasses(1));
-        //currentSemester.printSchedules();
+        currentSemester.printSchedules();
 
 
 

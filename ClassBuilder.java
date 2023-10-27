@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.sound.midi.Track;
+
 public class ClassBuilder 
 {
 
@@ -17,7 +19,7 @@ public class ClassBuilder
     {
         //classList = new ArrayList<ArrayList<Class>>();
         optionList = new ArrayList<Class>();
-        ArrayList<Class> optionList = new ArrayList<Class>();
+       //ArrayList<Class> optionList = new ArrayList<Class>();
             File allClasses = new File("classNames.csv");
             Scanner classFileScanner = new Scanner(allClasses);
             while (classFileScanner.hasNext())
@@ -111,7 +113,7 @@ public class ClassBuilder
                         Class pendingClass = new Class(className, startTime, endTime, location, teacher, mon, tue, wed, thu, fri);
                         optionList.add(pendingClass);
                         
-    
+                        
                         
                         //System.out.println(individualTimes.next());
                     }
@@ -133,8 +135,211 @@ public class ClassBuilder
     // {
     //     return this.classList.get(index);
     // } 
+    public void printSize()
+    {
+        System.out.println(optionList.size());
+    }
 
-    public void printSchedules()        //Rewrite this....
+
+
+                        //Check for duplicates
+
+    private ArrayList<Class> uniqueClasses()
+    {
+        ArrayList<Class> uniqueClasses = new ArrayList<Class>();
+        for(Class searchClass : optionList)
+        {
+            String searchTerm = searchClass.getClassName();
+            for(int i=0; i<optionList.size(); i++)            //loops once for every track in the trackList array
+            {   
+                Class pendingClass = optionList.get(i);
+                String pendingClassName = pendingClass.getClassName();
+                //System.out.println(pendingTitle);
+                if(pendingClassName.contains(searchTerm))
+                {
+                    boolean duplicate = false;
+                    for(int j = 0; j < uniqueClasses.size();j++)
+                    {
+                        if(pendingClass.getClassName().equals(uniqueClasses.get(j).getClassName()))   //this checks every track in searchResults to avoid duplicates
+                        {                                               //(No longer relevent as I changed the search to erase previous 
+                            duplicate = true;                           // searches, but is kept for future modification options))
+                        }
+                    }
+                   if(!duplicate)
+                    {
+                        uniqueClasses.add(pendingClass);                //adds results to track after confirming unique track
+                    }
+                }
+                
+            }
+        }
+        
+        for(Class printClass : uniqueClasses)
+        {
+            System.out.println(printClass.getClassName());
+        }
+        return uniqueClasses();
+    }
+
+
+
+
+
+
+
+
+    public void printSchedules()
+    {
+        ArrayList<Class> uniqueClasses = uniqueClasses();
+
+        //Compares schedules
+        ArrayList<Class> successfulSchedule = new ArrayList<Class>();
+
+        for
+
+
+
+
+
+
+
+        for(int i = 0; i<uniqueClasses.size(); i++ )
+        {
+            
+            for(Class searchClass : optionList)
+        {
+            String searchTerm = searchClass.getClassName();
+            for(int j=0; j<optionList.size(); j++)            //loops once for every track in the trackList array
+            {   
+                Class pendingClass = optionList.get(i);
+                String pendingClassName = pendingClass.getClassName();
+                //System.out.println(pendingTitle);
+                if(pendingClassName.contains(searchTerm))
+                {
+                    boolean duplicate = false;
+                    for(int k = 0; k < uniqueClasses.size();k++)
+                    {
+                        if(pendingClass.getClassName().equals(uniqueClasses.get(j).getClassName()))   //this checks every track in searchResults to avoid duplicates
+                        {                                               //(No longer relevent as I changed the search to erase previous 
+                            duplicate = true;                           // searches, but is kept for future modification options))
+                        }
+                    }
+                   if(!duplicate)
+                    {
+                        //uniqueClasses.add(pendingClass);                //adds results to track after confirming unique track
+                        for(int l = 0; l<optionList.size(); l++)
+                        {   
+                            Class previousClass = optionList.get(l);
+                            if(Class.compare(pendingClass, previousClass))
+                            {
+
+                            }
+                        }
+
+
+                        for(Class searchClass : optionList)
+                        {
+                            String searchTerm = searchClass.getClassName();
+                            for(int i=0; i<optionList.size(); i++)            //loops once for every track in the trackList array
+                            {   
+                                Class pendingClass = optionList.get(i);
+                                String pendingClassName = pendingClass.getClassName();
+                                //System.out.println(pendingTitle);
+                                if(pendingClassName.contains(searchTerm))
+                                {
+                                    boolean duplicate = false;
+                                    for(int j = 0; j < uniqueClasses.size();j++)
+                                    {
+                                        if(pendingClass.getClassName().equals(uniqueClasses.get(j).getClassName()))   //this checks every track in searchResults to avoid duplicates
+                                        {                                               //(No longer relevent as I changed the search to erase previous 
+                                            duplicate = true;                           // searches, but is kept for future modification options))
+                                        }
+                                    }
+                                if(!duplicate)
+                                    {
+                                        uniqueClasses.add(pendingClass);                //adds results to track after confirming unique track
+                                    }
+                }
+                
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    }
+                }
+                
+            }
+        }
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+    }
+
+
+    public void printSchedulesFailed()
+    {
+        
+        ArrayList<Class> uniqueClasses = new ArrayList<Class>();
+        //looks for unique classes
+        for (Class pendingClass : optionList)
+        {
+            
+            for(int i = 0; i<uniqueClasses.size(); i++)
+            {
+               
+                boolean duplicate = false;
+                if(pendingClass == uniqueClasses.get(i))
+                {
+                    duplicate = true;
+                }
+                if (!duplicate)
+                {
+                    uniqueClasses.add(pendingClass);
+                }
+                
+                for (int j = 0; j < uniqueClasses.size(); j++)
+                {
+                }
+            }
+            System.out.println("Number of unique Classes: " + uniqueClasses.get(0));
+            
+        }
+
+
+
+
+    }
+
+
+    public void printSchedulesConcept(int t)        //Rewrite this....
     {
         ArrayList<Class> class1;
         ArrayList<Class> class2;

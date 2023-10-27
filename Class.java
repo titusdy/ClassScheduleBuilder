@@ -166,7 +166,7 @@ public class Class {
         return works;
     }
 
-    public boolean compareTo(Class class1, Class class2)
+    public static boolean compare(Class class1, Class class2)
     {
         boolean works = true;
         if(class1.onMon() && class2.onMon())
