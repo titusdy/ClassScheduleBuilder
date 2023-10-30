@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.sound.midi.Track;
 
 public class ClassBuilder 
 {
@@ -39,16 +38,16 @@ public class ClassBuilder
                     while (individualTimes.hasNext())
                     {
                         String className = individualTimes.next();
-                        System.out.println(className);
+                        // System.out.println(className);
                         //System.out.println(individualTimes.next());
                         double startTime = individualTimes.nextDouble();
-                        System.out.println(startTime);
+                        // System.out.println(startTime);
                         double endTime = individualTimes.nextDouble();
-                        System.out.println(endTime);
+                        // System.out.println(endTime);
                         String location = individualTimes.next();
-                        System.out.println(location);
+                        // System.out.println(location);
                         String teacher = individualTimes.next();
-                        System.out.println(teacher);
+                        // System.out.println(teacher);
                         //System.out.println(individualTimes.next());
 
                         boolean mon;
@@ -60,7 +59,7 @@ public class ClassBuilder
                         if(individualTimes.next().equalsIgnoreCase("mon"))
                         {
                             mon = true; 
-                            System.out.println(mon);
+                            // System.out.println(mon);
                         }
                         else
                         {
@@ -73,12 +72,12 @@ public class ClassBuilder
                         else
                         {
                             tue = false;
-                        System.out.println(tue);
+                        // System.out.println(tue);
                         }
                         if(individualTimes.next().equalsIgnoreCase("wed"))
                         {
                             wed = true;
-                        System.out.println(wed);
+                        // System.out.println(wed);
                         }
                         else
                         {
@@ -91,14 +90,14 @@ public class ClassBuilder
                         else
                         {
                             thu = false;
-                        System.out.println(thu);
+                        //System.out.println(thu);
                         }
                         if(individualTimes.hasNext())
                         {
                             if(individualTimes.next().equalsIgnoreCase("fri"))
                             {
                                     fri = true;
-                                System.out.println(fri);
+                                //System.out.println(fri);
                             }
                             else
                             {
@@ -108,7 +107,7 @@ public class ClassBuilder
                         else
                         {
                                 fri = false;
-                            System.out.println(fri);
+                            //System.out.println(fri);
                         }
                         Class pendingClass = new Class(className, startTime, endTime, location, teacher, mon, tue, wed, thu, fri);
                         optionList.add(pendingClass);
@@ -119,13 +118,15 @@ public class ClassBuilder
                     }
                     
                 }
+                eachClassScanner.close();
             }
+            classFileScanner.close();
             // if(!optionList.isEmpty())
             //     {
             //         classList.add(optionList);
             //         optionList.clear();
             //     }
-            System.out.println(optionList.size());
+            System.out.println("Size of OptionList array: " + optionList.size());
             //System.out.println(classList.size());
     }
 
@@ -191,7 +192,7 @@ public class ClassBuilder
     public void printSchedules()
     {
         ArrayList<String> uniqueClasses = uniqueClasses();
-
+        int count = 1;
         //Compares schedules
         ArrayList<Class> successfulSchedule = new ArrayList<Class>();
         
@@ -201,21 +202,26 @@ public class ClassBuilder
             boolean continueFilter = true;
             for (Class classUploaded : successfulSchedule)
             {            
-                if(pendingClass.getClassName() == classUploaded.getClassName())
+
+                if(pendingClass.getClassName().equals(classUploaded.getClassName()))
                 {
-                    continueFilter = false;
-                    System.out.println("continueFilter false: " + pendingClass.getClassName());
+                    continueFilter = false;               //@TODO fix the logic so it doesn't skip every math option
+                    //System.out.println("continueFilter false: " + pendingClass.getClassName());
                 }
+                //if(continueFilter)
+                //{
+                    //System.out.println(pendingClass.getClassName() + " and " + classUploaded.getClassName() + "Aren't the same");
+                //}
             }
             if(continueFilter)
             {
                 boolean addFilter = true;
                 for(Class classUploaded : successfulSchedule)
                 {
-                    if(Class.compare(classUploaded, pendingClass))
+                    if(!Class.compare(classUploaded, pendingClass))
                     {
                         addFilter = false;
-                        System.out.println("addFilter false: " + pendingClass.getClassName());
+                        //System.out.println("addFilter false: " + pendingClass.getClassName());
                     }
                 }
                 if (addFilter)
@@ -225,11 +231,16 @@ public class ClassBuilder
             }
 
 
-        }
-        System.out.println(successfulSchedule.size());
-        for(Class printClass : successfulSchedule)
-        {
-            System.out.println(printClass.getClassName());
+            System.out.println("Schdule Size: " + successfulSchedule.size());
+            if((successfulSchedule.size() == uniqueClasses.size()))     //@TODO figure out why Math doesn't have additional options printed
+            {
+                System.out.println("Option " + count + "\n---------------");
+                count += 1;
+                for(Class printClass : successfulSchedule)
+                {
+                    System.out.println(printClass.toString());
+                }
+            }
         }
 
 
@@ -293,7 +304,7 @@ public class ClassBuilder
                 {
                 }
             }
-            System.out.println("Number of unique Classes: " + uniqueClasses.get(0));
+            //System.out.println("Number of unique Classes: " + uniqueClasses.get(0));
             
         }
 
@@ -303,70 +314,8 @@ public class ClassBuilder
     }
 
 
-    public void printSchedulesConcept(int t)        //Rewrite this....
-    {
-        ArrayList<Class> class1;
-        ArrayList<Class> class2;
-        ArrayList<Class> class3;
-        ArrayList<Class> class4;
-        ArrayList<Class> class5;
-        ArrayList<Class> class6;
-        ArrayList<Class> class7;
-        int i = classList.size();
-        if(!classList.isEmpty())
-        {
-            class1 = (classList.get(0));
-            classList.remove(0);
-        }
-        if(!classList.isEmpty())
-        {
-            class2 = (classList.get(0));
-            classList.remove(0);
-        }
-
-        if(!classList.isEmpty())
-        {
-            class3 = (classList.get(0));
-            classList.remove(0);
-        }
-
-        if(!classList.isEmpty())
-        {
-            class4 = (classList.get(0));
-            classList.remove(0);
-        }
-
-        if(!classList.isEmpty())
-        {
-            class5 = (classList.get(0));
-            classList.remove(0);
-        }
-
-        if(!classList.isEmpty())
-        {
-            class6 = (classList.get(0));
-            classList.remove(0);
-        }
-
-        if(!classList.isEmpty())
-        {
-            class7 = (classList.get(0));
-            classList.remove(0);
-        }
-        for (; i< classList.size(); i++)
-        {
+    
             
-
-
-        }
-            //ArrayList<Class> pendingClass = classList.get(1);
-            // for(int j = 0; j < pendingClass.size(); j++)
-            // {
-
-
-
-
-            // } 
 
         
     
@@ -382,7 +331,7 @@ public class ClassBuilder
 
 
         
-    }
+    
 
 
 }

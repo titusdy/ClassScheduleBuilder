@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -96,6 +97,50 @@ public class Class {
 
 
     //METHODS
+    public String toString()
+    {
+        DecimalFormat time = new DecimalFormat("00");
+        double startTime = this.startTime;
+        double endTime = this.endTime;
+
+        if(this.startTime >12)
+        {
+            startTime = (this.startTime - 12);
+        }
+        if(this.endTime > 12)
+        {
+            endTime = (this.endTime - 12);
+        }
+
+        String output = (this.className + " " + (int)startTime + ":" + time.format((int)((startTime - (int)startTime) * 100)) + 
+                            " - " + (int)endTime + ":" + time.format((int)((endTime - (int)endTime) * 100)) + " " + this.location 
+                            + " " + this.teacher + " ");
+        if (mon)
+        {
+            output = output + "Mon ";
+        }
+
+        if (tue)
+        {
+            output = output + "Tue ";
+        }
+
+        if (wed)
+        {
+            output = output + "Wed ";
+        }
+
+        if (thu)
+        {
+            output = output + "Thu ";
+        }
+
+        if (fri)
+        {
+            output = output + "Fri ";
+        }
+        return output;
+    }
     public double getStartTime()
     {
         return this.startTime;
@@ -153,6 +198,7 @@ public class Class {
         if (startTime > class2.getStartTime() && startTime < class2.getEndTime())
         {
             works = false;
+            //System.out.println("\nHere");
         }
         else if (endTime > class2.getStartTime() && startTime < class2.getEndTime())
         {
@@ -172,22 +218,27 @@ public class Class {
         if(class1.onMon() && class2.onMon())
         {
             works = class1.compareTime(class2);
+            //System.out.println("Monday works: " + works + " for: " + class1.toString() + "    AND    " + class2.toString());
         }
         if(class1.onTue() && class2.onTue())
         {
             works = class1.compareTime(class2);
+            //System.out.println("Tuesday works: " + works + " for: " + class1.toString() + " and " + class2.toString());
         }
         if(class1.onWed() && class2.onWed())
         {
             works = class1.compareTime(class2);
+            //System.out.println("Wed works: " + works + " for: " + class1.toString() + " and " + class2.toString());
         }
         if(class1.onThu() && class2.onThu())
         {
             works = class1.compareTime(class2);
+            //System.out.println("Thu works: " + works + " for: " + class1.toString() + " and " + class2.toString());
         }
         if(class1.onFri() && class2.onFri())
         {
             works = class1.compareTime(class2);
+            //System.out.println("Fri works: " + works + " for: " + class1.toString() + " and " + class2.toString());
         }
 
         return works;
